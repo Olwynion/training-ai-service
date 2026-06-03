@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Grpc.AspNetCore" Version="2.80.0" />
+    <PackageReference Include="Grpc.AspNetCore.Server.Reflection" Version="2.80.0" />
+    <PackageReference Include="MediatR" Version="14.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Training.AI.Services\Training.AI.Services.csproj" />
+    <ProjectReference Include="..\Training.AI.Infrastructure\Training.AI.Infrastructure.csproj" />
+    <ProjectReference Include="..\Training.AI.Domain\Training.AI.Domain.csproj" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Training.AI": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}
