@@ -14,7 +14,7 @@ public static class ServiceCollectionExtensions
     {
         services.AddSingleton<IDbConnectionFactory, DbConnectionFactory>();
         services.AddScoped<IGenerationHistoryRepository, GenerationHistoryRepository>();
-        services.AddHttpClient<IAiPlanGenerator, OpenAiPlanGenerator>();
+        services.AddHttpClient<IAiPlanGenerator, GroqPlanGenerator>();
 
         return services;
     }
