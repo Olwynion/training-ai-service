@@ -43,6 +43,6 @@ public class GeneratePlanCommandHandler(
         };
 
         var programTypeStr = request.ProgramType == "fullbody" ? "фулбоди" : "сплит";
-        return $"Предпочтения: {request.DaysPerWeek} тренировок в неделю, программа: {programTypeStr}, фокус: {focusGroupStr}.";
+        return $"Предпочтения: программа: {programTypeStr}, фокус: {focusGroupStr}.";
     }
 }

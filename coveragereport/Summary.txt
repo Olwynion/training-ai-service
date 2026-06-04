@@ -1,0 +1,98 @@
+Summary
+  Generated on: 04.06.2026 - 14:15:20
+  Coverage date: 04.06.2026 - 14:15:16
+  Parser: Cobertura
+  Assemblies: 4
+  Classes: 70
+  Files: 19
+  Line coverage: 1.1%
+  Covered lines: 53
+  Uncovered lines: 4603
+  Coverable lines: 4656
+  Total lines: 13936
+  Branch coverage: 0.2% (5 of 2354)
+  Covered branches: 5
+  Total branches: 2354
+  Method coverage: 1.9% (23 of 1178)
+  Full method coverage: 1.8% (22 of 1178)
+  Covered methods: 23
+  Fully covered methods: 22
+  Total methods: 1178
+
+Training.AI                                                             26.4%
+  Program                                                                  0%
+  Training.AI.Grpc.AiGrpcService                                           0%
+  Training.AI.Handlers.GeneratePlan.GeneratePlanCommand                 85.7%
+  Training.AI.Handlers.GeneratePlan.GeneratePlanCommandHandler            75%
+  Training.AI.Handlers.GeneratePlan.GeneratePlanResult                   100%
+  Training.AI.Handlers.GetHistory.GetHistoryQuery                        100%
+  Training.AI.Handlers.GetHistory.GetHistoryQueryHandler                 100%
+  Training.AI.Interceptors.GrpcExceptionInterceptor                        0%
+  Training.AI.ServiceCollectionExtensions                                  0%
+  Training.AI.Startup                                                      0%
+
+Training.AI.Domain                                                       100%
+  Training.AI.Domain.Entities.GenerationHistory                          100%
+
+Training.AI.Infrastructure                                                 0%
+  Training.AI.Infrastructure.Factories.DbConnectionFactory                 0%
+  Training.AI.Infrastructure.Repositories.GenerationHistoryRepository      0%
+  Training.AI.Infrastructure.Services.GroqPlanGenerator                    0%
+  Training.AI.Infrastructure.Services.OpenAiPlanGenerator                  0%
+
+Training.AI.Services                                                       0%
+  Training.AI.Proto.AiReflection                                           0%
+  Training.AI.Proto.AiService                                              0%
+  Training.AI.Proto.ExerciseTemplate                                       0%
+  Training.AI.Proto.GeneratePlanRequest                                    0%
+  Training.AI.Proto.GeneratePlanResponse                                   0%
+  Training.AI.Proto.GenerationHistoryItem                                  0%
+  Training.AI.Proto.GetGenerationHistoryRequest                            0%
+  Training.AI.Proto.GetGenerationHistoryResponse                           0%
+  Training.Training.Proto.CreateExerciseRequest                            0%
+  Training.Training.Proto.CreateExerciseResponse                           0%
+  Training.Training.Proto.CreateWorkoutPlanRequest                         0%
+  Training.Training.Proto.CreateWorkoutPlanResponse                        0%
+  Training.Training.Proto.CycleData                                        0%
+  Training.Training.Proto.DayData                                          0%
+  Training.Training.Proto.DayExercise                                      0%
+  Training.Training.Proto.DayExerciseUpdate                                0%
+  Training.Training.Proto.DeleteExerciseRequest                            0%
+  Training.Training.Proto.DeleteExerciseResponse                           0%
+  Training.Training.Proto.DeleteWorkoutPlanRequest                         0%
+  Training.Training.Proto.DeleteWorkoutPlanResponse                        0%
+  Training.Training.Proto.Exercise                                         0%
+  Training.Training.Proto.ExerciseSet                                      0%
+  Training.Training.Proto.GetBuiltInExercisesRequest                       0%
+  Training.Training.Proto.GetBuiltInExercisesResponse                      0%
+  Training.Training.Proto.GetCycleDataRequest                              0%
+  Training.Training.Proto.GetCycleDataResponse                             0%
+  Training.Training.Proto.GetExercisesRequest                              0%
+  Training.Training.Proto.GetExercisesResponse                             0%
+  Training.Training.Proto.GetUserPreferencesRequest                        0%
+  Training.Training.Proto.GetUserPreferencesResponse                       0%
+  Training.Training.Proto.GetUserWorkoutPlansRequest                       0%
+  Training.Training.Proto.GetUserWorkoutPlansResponse                      0%
+  Training.Training.Proto.GetWorkoutPlanRequest                            0%
+  Training.Training.Proto.GetWorkoutPlanResponse                           0%
+  Training.Training.Proto.IncrementProgressRequest                         0%
+  Training.Training.Proto.IncrementProgressResponse                        0%
+  Training.Training.Proto.OneRmEntry                                       0%
+  Training.Training.Proto.PlanDay                                          0%
+  Training.Training.Proto.PlanDayUpdate                                    0%
+  Training.Training.Proto.SaveOneRmsRequest                                0%
+  Training.Training.Proto.SaveOneRmsResponse                               0%
+  Training.Training.Proto.SavePreferencesRequest                           0%
+  Training.Training.Proto.SavePreferencesResponse                          0%
+  Training.Training.Proto.SetCycleRequest                                  0%
+  Training.Training.Proto.SetCycleResponse                                 0%
+  Training.Training.Proto.TrainingReflection                               0%
+  Training.Training.Proto.TrainingService                                  0%
+  Training.Training.Proto.UpdateExerciseRequest                            0%
+  Training.Training.Proto.UpdateExerciseResponse                           0%
+  Training.Training.Proto.UpdatePlanDaysRequest                            0%
+  Training.Training.Proto.UpdatePlanDaysResponse                           0%
+  Training.Training.Proto.UpdateWorkoutPlanRequest                         0%
+  Training.Training.Proto.UpdateWorkoutPlanResponse                        0%
+  Training.Training.Proto.UserPreferences                                  0%
+  Training.Training.Proto.WorkoutPlan                                      0%
