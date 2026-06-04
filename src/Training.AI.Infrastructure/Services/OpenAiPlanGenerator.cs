@@ -9,7 +9,7 @@ public class OpenAiPlanGenerator(IConfiguration configuration, HttpClient httpCl
     private readonly string _apiKey = configuration["OpenAi:ApiKey"] ?? string.Empty;
     private readonly string _model = configuration["OpenAi:Model"] ?? "gpt-4o";
 
-    public async Task<string> GeneratePlanAsync(string prompt, string userExercisesJson, CancellationToken ct = default)
+    public async Task<string> GeneratePlanAsync(string prompt, string userExercisesJson, string preferencesContext, CancellationToken ct = default)
     {
         if (string.IsNullOrEmpty(_apiKey))
         {
@@ -22,7 +22,7 @@ public class OpenAiPlanGenerator(IConfiguration configuration, HttpClient httpCl
             messages = new[]
             {
                 new { role = "system", content = "Ты профессиональный фитнес-тренер. Составь тренировочный план на основе запроса пользователя и доступных упражнений. Ответ верни в JSON: {\"name\": string, \"days\": [{\"day\": string, \"exercises\": [{\"name\": string, \"sets\": int, \"reps\": int}]}]}. Все названия дней и упражнений на русском языке." },
-                new { role = "user", content = $"User request: {prompt}\n\nAvailable exercises:\n{userExercisesJson}" }
+                new { role = "user", content = $"{preferencesContext}\n\nUser request: {prompt}\n\nAvailable exercises:\n{userExercisesJson}" }
             },
             temperature = 0.7
         };

@@ -3,6 +3,7 @@ using Training.AI.Domain.Repositories;
 using Training.AI.Domain.Services;
 using Training.AI.Handlers.GeneratePlan;
 using Training.AI.Domain.Entities;
+using Training.Training.Proto;
 
 namespace Training.AI.Tests.Handlers;
 
@@ -23,7 +24,7 @@ public class GeneratePlanCommandHandlerTests
     {
         var planJson = """{"name":"Test Plan","days":[]}""";
         _generatorMock
-            .Setup(g => g.GeneratePlanAsync(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<CancellationToken>()))
+            .Setup(g => g.GeneratePlanAsync(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<CancellationToken>()))
             .ReturnsAsync(planJson);
 
         _repositoryMock
@@ -31,14 +32,14 @@ public class GeneratePlanCommandHandlerTests
             .ReturnsAsync(1L);
 
         var command = new GeneratePlanCommand(
-            "user1", "build a plan", []);
+            "user1", "build a plan", [], 3, "fullbody", MuscleGroup.Unspecified);
 
         var result = await _handler.Handle(command, CancellationToken.None);
 
         Assert.Equal(1, result.Id);
         Assert.Equal("Test Plan", result.PlanName);
         Assert.Equal(planJson, result.PlanJson);
-        _generatorMock.Verify(g => g.GeneratePlanAsync("build a plan", "[]", It.IsAny<CancellationToken>()), Times.Once);
+        _generatorMock.Verify(g => g.GeneratePlanAsync("build a plan", "[]", It.IsAny<string>(), It.IsAny<CancellationToken>()), Times.Once);
         _repositoryMock.Verify(r => r.AddAsync(It.IsAny<GenerationHistory>(), It.IsAny<CancellationToken>()), Times.Once);
     }
 
@@ -47,7 +48,7 @@ public class GeneratePlanCommandHandlerTests
     {
         var planJson = """{"days":[]}""";
         _generatorMock
-            .Setup(g => g.GeneratePlanAsync(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<CancellationToken>()))
+            .Setup(g => g.GeneratePlanAsync(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<CancellationToken>()))
             .ReturnsAsync(planJson);
 
         _repositoryMock
@@ -55,7 +56,7 @@ public class GeneratePlanCommandHandlerTests
             .ReturnsAsync(2L);
 
         var command = new GeneratePlanCommand(
-            "user1", "build a plan", []);
+            "user1", "build a plan", [], 3, "fullbody", MuscleGroup.Unspecified);
 
         var result = await _handler.Handle(command, CancellationToken.None);
 

@@ -9,7 +9,7 @@ public class GroqPlanGenerator(IConfiguration configuration, HttpClient httpClie
     private readonly string _apiKey = configuration["Groq:ApiKey"] ?? string.Empty;
     private readonly string _model = configuration["Groq:Model"] ?? "llama-3.3-70b-versatile";
 
-    public async Task<string> GeneratePlanAsync(string prompt, string userExercisesJson, CancellationToken ct = default)
+    public async Task<string> GeneratePlanAsync(string prompt, string userExercisesJson, string preferencesContext, CancellationToken ct = default)
     {
         if (string.IsNullOrEmpty(_apiKey))
             return MockPlanResponse();
@@ -19,8 +19,8 @@ public class GroqPlanGenerator(IConfiguration configuration, HttpClient httpClie
             model = _model,
             messages = new[]
             {
-                new { role = "system", content = "Ты профессиональный фитнес-тренер. Составь тренировочный план на основе запроса пользователя и доступных упражнений. Ответ верни ТОЛЬКО в виде JSON, без пояснений, без markdown. Формат: {\"name\": string, \"days\": [{\"day\": string, \"exercises\": [{\"name\": string, \"sets\": int, \"reps\": int}]}]}. Все названия дней и упражнений на русском языке." },
-                new { role = "user", content = $"User request: {prompt}\n\nAvailable exercises:\n{userExercisesJson}" }
+                new { role = "system", content = "Ты профессиональный фитнес-тренер. Составь тренировочный план по запросу пользователя. Каждый день ОБЯЗАТЕЛЬНО должен содержать минимум 1 упражнение. Ответ верни ТОЛЬКО в виде JSON, без пояснений, без markdown. Формат: {\"name\": string, \"days\": [{\"day\": string, \"focus\": int, \"exercises\": [{\"id\": int, \"sets\": int, \"reps\": int}]}]}. focus — номер группы мышц: 0=равномерно,1=грудные,2=спина,3=ноги,4=плечи,5=бицепс,6=трицепс,7=пресс. Количество дней СТРОГО равно числу, которое указал пользователь в запросе. Если пользователь сказал 2 дня — верни РОВНО 2 дня. Не больше. Все названия дней на русском языке. Упражнения ВЫБИРАЙ ТОЛЬКО ИЗ ПЕРЕДАННЫХ СПИСКА — используй их id (number). name НЕ НУЖЕН в ответе. id начинаются с 1 и заканчиваются числом переданных упражнений. НИКОГДА не используй id больше этого числа — таких упражнений не существует. Каждый день должен содержать 3-6 упражнений." },
+                new { role = "user", content = $"{preferencesContext}\n\nUser request: {prompt}\n\nДоступные упражнения (используй ТОЛЬКО их id, не меняй названия):\n{userExercisesJson}" }
             },
             temperature = 0.7
         };
@@ -62,24 +62,19 @@ public class GroqPlanGenerator(IConfiguration configuration, HttpClient httpClie
                 "name": "Тренировка на всё тело",
                 "days": [
                     {
-                        "day": "День 1 — Грудные и плечи",
+                        "day": "День 1 — Грудные",
+                        "focus": 0,
                         "exercises": [
-                            { "name": "Жим лёжа", "sets": 3, "reps": 10 },
-                            { "name": "Жим гантелей сидя", "sets": 3, "reps": 10 }
+                            { "id": 1, "sets": 3, "reps": 10 },
+                            { "id": 2, "sets": 3, "reps": 10 }
                         ]
                     },
                     {
-                        "day": "День 2 — Спина и бицепс",
+                        "day": "День 2 — Спина",
+                        "focus": 0,
                         "exercises": [
-                            { "name": "Тяга штанги в наклоне", "sets": 3, "reps": 8 },
-                            { "name": "Подтягивания", "sets": 3, "reps": 10 }
-                        ]
-                    },
-                    {
-                        "day": "День 3 — Ноги",
-                        "exercises": [
-                            { "name": "Приседания со штангой", "sets": 3, "reps": 10 },
-                            { "name": "Жим ногами", "sets": 3, "reps": 12 }
+                            { "id": 3, "sets": 3, "reps": 8 },
+                            { "id": 4, "sets": 3, "reps": 10 }
                         ]
                     }
                 ]

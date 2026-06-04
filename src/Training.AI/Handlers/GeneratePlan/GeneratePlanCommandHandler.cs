@@ -2,6 +2,7 @@ using System.Text.Json;
 using MediatR;
 using Training.AI.Domain.Repositories;
 using Training.AI.Domain.Services;
+using Training.Training.Proto;
 
 namespace Training.AI.Handlers.GeneratePlan;
 
@@ -12,7 +13,8 @@ public class GeneratePlanCommandHandler(
     public async Task<GeneratePlanResult> Handle(GeneratePlanCommand request, CancellationToken ct)
     {
         var exercisesJson = JsonSerializer.Serialize(request.Exercises);
-        var planJson = await planGenerator.GeneratePlanAsync(request.Prompt, exercisesJson, ct);
+        var preferencesContext = GetPreferencesContext(request);
+        var planJson = await planGenerator.GeneratePlanAsync(request.Prompt, exercisesJson, preferencesContext, ct);
 
         using var planDoc = JsonDocument.Parse(planJson);
         var planName = planDoc.RootElement.TryGetProperty("name", out var nameProp)
@@ -24,5 +26,23 @@ public class GeneratePlanCommandHandler(
         history.SetId(id);
 
         return new GeneratePlanResult(id, planName, planJson, history.CreatedAt);
+    }
+
+    private static string GetPreferencesContext(GeneratePlanCommand request)
+    {
+        var focusGroupStr = request.FocusGroup switch
+        {
+            MuscleGroup.Chest => "грудные",
+            MuscleGroup.Back => "спина",
+            MuscleGroup.Legs => "ноги",
+            MuscleGroup.Shoulders => "плечи",
+            MuscleGroup.Biceps => "бицепс",
+            MuscleGroup.Triceps => "трицепс",
+            MuscleGroup.Core => "пресс",
+            _ => "равномерно"
+        };
+
+        var programTypeStr = request.ProgramType == "fullbody" ? "фулбоди" : "сплит";
+        return $"Предпочтения: программа: {programTypeStr}, фокус: {focusGroupStr}.";
     }
 }
