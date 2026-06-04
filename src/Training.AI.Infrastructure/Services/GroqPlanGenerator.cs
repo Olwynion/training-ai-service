@@ -19,7 +19,7 @@ public class GroqPlanGenerator(IConfiguration configuration, HttpClient httpClie
             model = _model,
             messages = new[]
             {
-                new { role = "system", content = "Ты профессиональный фитнес-тренер. Составь тренировочный план на основе запроса пользователя и доступных упражнений. Ответ верни ТОЛЬКО в виде JSON, без пояснений, без markdown. Формат: {\"name\": string, \"days\": [{\"day\": string, \"exercises\": [{\"name\": string, \"sets\": int, \"reps\": int}]}]}. Все названия дней и упражнений на русском языке." },
+                new { role = "system", content = "Ты профессиональный фитнес-тренер. Составь тренировочный план СТРОГО по предпочтениям пользователя. Используй ТОЛЬКО переданные доступные упражнения. Ответ верни ТОЛЬКО в виде JSON, без пояснений, без markdown. Формат: {\"name\": string, \"days\": [{\"day\": string, \"focus\": int, \"exercises\": [{\"name\": string, \"sets\": int, \"reps\": int}]}]}. focus — номер группы мышц: 0=равномерно,1=грудные,2=спина,3=ноги,4=плечи,5=бицепс,6=трицепс,7=пресс. daysPerWeek определяет количество дней в плане. Все названия дней и упражнений на русском языке." },
                 new { role = "user", content = $"{preferencesContext}\n\nUser request: {prompt}\n\nAvailable exercises:\n{userExercisesJson}" }
             },
             temperature = 0.7
