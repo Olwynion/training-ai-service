@@ -1,0 +1,35 @@
+Summary
+  Generated on: 04.06.2026 - 14:23:05
+  Coverage date: 04.06.2026 - 14:15:16 - 04.06.2026 - 14:23:04
+  Parser: MultiReport (2x Cobertura)
+  Assemblies: 2
+  Classes: 11
+  Files: 11
+  Line coverage: 42.9%
+  Covered lines: 61
+  Uncovered lines: 81
+  Coverable lines: 142
+  Total lines: 288
+  Branch coverage: 35.7% (5 of 14)
+  Covered branches: 5
+  Total branches: 14
+  Method coverage: 70.5% (24 of 34)
+  Full method coverage: 64.7% (22 of 34)
+  Covered methods: 24
+  Fully covered methods: 22
+  Total methods: 34
+
+Training.AI                                                        33%
+  Program                                                           0%
+  Training.AI.Grpc.AiGrpcService                                    0%
+  Training.AI.Handlers.GeneratePlan.GeneratePlanCommand          85.7%
+  Training.AI.Handlers.GeneratePlan.GeneratePlanCommandHandler     75%
+  Training.AI.Handlers.GeneratePlan.GeneratePlanResult            100%
+  Training.AI.Handlers.GetHistory.GetHistoryQuery                 100%
+  Training.AI.Handlers.GetHistory.GetHistoryQueryHandler          100%
+  Training.AI.Interceptors.GrpcExceptionInterceptor                80%
+  Training.AI.ServiceCollectionExtensions                           0%
+  Training.AI.Startup                                               0%
+
+Training.AI.Domain                                                100%
+  Training.AI.Domain.Entities.GenerationHistory                   100%
