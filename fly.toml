@@ -1,0 +1,15 @@
+app = "training-ai"
+
+[build]
+
+[http_service]
+  internal_port = 5004
+  force_https = true
+
+[env]
+  CONNECTIONSTRINGS__DEFAULTCONNECTION = "${DATABASE_URL}"
+  GROQ__APIKEY = "${GROQ_API_KEY}"
+  GROQ__MODEL = "llama-3.3-70b-versatile"
+  OPENAI__APIKEY = "${OPENAI_API_KEY}"
+  OPENAI__MODEL = "gpt-4o"
+  ASPNETCORE_ENVIRONMENT = "Production"
