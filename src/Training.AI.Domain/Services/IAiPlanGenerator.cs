@@ -2,5 +2,5 @@ namespace Training.AI.Domain.Services;
 
 public interface IAiPlanGenerator
 {
-    Task<string> GeneratePlanAsync(string prompt, string userExercisesJson, CancellationToken ct = default);
+    Task<string> GeneratePlanAsync(string prompt, string userExercisesJson, string preferencesContext, CancellationToken ct = default);
 }

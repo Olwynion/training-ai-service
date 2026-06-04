@@ -9,7 +9,7 @@ public class GroqPlanGenerator(IConfiguration configuration, HttpClient httpClie
     private readonly string _apiKey = configuration["Groq:ApiKey"] ?? string.Empty;
     private readonly string _model = configuration["Groq:Model"] ?? "llama-3.3-70b-versatile";
 
-    public async Task<string> GeneratePlanAsync(string prompt, string userExercisesJson, CancellationToken ct = default)
+    public async Task<string> GeneratePlanAsync(string prompt, string userExercisesJson, string preferencesContext, CancellationToken ct = default)
     {
         if (string.IsNullOrEmpty(_apiKey))
             return MockPlanResponse();
@@ -20,7 +20,7 @@ public class GroqPlanGenerator(IConfiguration configuration, HttpClient httpClie
             messages = new[]
             {
                 new { role = "system", content = "Ты профессиональный фитнес-тренер. Составь тренировочный план на основе запроса пользователя и доступных упражнений. Ответ верни ТОЛЬКО в виде JSON, без пояснений, без markdown. Формат: {\"name\": string, \"days\": [{\"day\": string, \"exercises\": [{\"name\": string, \"sets\": int, \"reps\": int}]}]}. Все названия дней и упражнений на русском языке." },
-                new { role = "user", content = $"User request: {prompt}\n\nAvailable exercises:\n{userExercisesJson}" }
+                new { role = "user", content = $"{preferencesContext}\n\nUser request: {prompt}\n\nAvailable exercises:\n{userExercisesJson}" }
             },
             temperature = 0.7
         };

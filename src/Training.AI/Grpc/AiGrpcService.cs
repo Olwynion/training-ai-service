@@ -11,7 +11,13 @@ public class AiGrpcService(IMediator mediator) : AiService.AiServiceBase
     public override async Task<GeneratePlanResponse> GeneratePlan(GeneratePlanRequest request, ServerCallContext context)
     {
         var result = await mediator.Send(
-            new GeneratePlanCommand(request.UserId, request.Prompt, request.Exercises.ToList()),
+            new GeneratePlanCommand(
+                request.UserId,
+                request.Prompt,
+                request.Exercises.ToList(),
+                request.DaysPerWeek,
+                request.ProgramType,
+                request.FocusGroup),
             context.CancellationToken);
 
         return new GeneratePlanResponse
